@@ -1,0 +1,31 @@
+{
+  "systemdata": {
+    "timestamp": "16:24:12.818123 - Oct 21 2020",
+    "ingestNode": "ingester1.kube.beer"
+  },
+  "metadata": {
+    "devicename": "kortlandpad-iot-livingroom"
+  },
+  "data": {
+    "metrics": [
+      {
+        "name": "temperature",
+        "type": "gauge",
+        "tags": [
+          "sensor-1",
+          "dunno"
+        ],
+        "value": 21.7
+      },
+      {
+        "name": "humidity",
+        "type": "gauge",
+        "tags": [
+          "sensor-3",
+          "good"
+        ],
+        "value": 42
+      }
+    ]
+  }
+}
