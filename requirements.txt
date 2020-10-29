@@ -1,2 +1,4 @@
 minio
 asyncio-nats-client
+redis
+redistimeseries

@@ -9,11 +9,18 @@ nc = NATS()
 
 async def publish(loop):
     nc = NATS()
-    await nc.connect("localhost:4222", loop=loop)
-    x = 10
+    await nc.connect("192.168.64.102:4222", loop=loop)
+    x = 3000
     while x >= 0:
         message = json.dumps(randomize_json()).encode('utf-8')
-        await nc.publish(subject='foo', payload=message)
+        try:
+            response = await nc.request(subject='ingest_metric',
+                                        payload=message,
+                                        timeout=1)
+            print(response.data.decode())
+            await nc.flush()
+        except ErrTimeout:
+            print('Request timed out')
         x = x - 1
         sleep(1)
 
@@ -54,6 +61,8 @@ def randomize_json():
     }
     return randomized_json
 # --------------------------------------------------------------
+
+
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     loop.run_until_complete(publish(loop))
